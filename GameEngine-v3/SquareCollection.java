@@ -32,4 +32,12 @@ public class SquareCollection extends ColoredBox{
 	            box.draw(graphics);
 	        }
 	}
+	
+	public ArrayList<ColoredBox> getFyrkanter(){
+		return fyrkanter;
+	}
+	
+	public void removeFyrkanter(ColoredBox box) {
+		fyrkanter.remove(box);
+	}
 }
