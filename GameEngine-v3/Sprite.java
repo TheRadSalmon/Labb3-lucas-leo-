@@ -16,6 +16,6 @@ public abstract class Sprite {
 		this.width = width;
 		this.height = height;
 	}
-	public abstract void update(Keyboard keyboard);
+	public abstract void update(Keyboard keyboard, SquareCollection square); // Titta över denna ändring om inte fungerar
 	public abstract void draw(Graphics2D graphics);
 }
