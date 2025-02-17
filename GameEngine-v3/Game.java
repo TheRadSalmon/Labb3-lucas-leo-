@@ -13,7 +13,7 @@ public class Game {
 	
 	public Game(GameBoard board) {
 	boll = new Boll(390,250,20,Color.ORANGE);
-	bat = new Bat(200, 550, 75, 10, Color.RED);
+	bat = new Bat(200, 550, 75, 10, Color.RED, boll);
 	fyrkanter = new SquareCollection(50, 0, 20, 20);
 	}
 
