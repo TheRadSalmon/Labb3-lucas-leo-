@@ -1,5 +1,6 @@
 import java.awt.Graphics2D;
 import java.awt.Color;
+import java.awt.Rectangle;
 
 
 public class Bat extends Sprite {
@@ -19,23 +20,25 @@ public class Bat extends Sprite {
 			setX(getX()+7);
 		}
 		
-		if(boll.getX() <= getX() + getWidth() && boll.getX() >= getX() && (boll.getY()) + boll.getHeight() >= getY()) { // getHeight() eventuellt. Här är problemet
-		    if(boll.getyV() > 0) {
-		    	boll.setyV(-boll.getyV());
-		    	System.out.println("Ovan Studs");
-		    }
-		}else if(boll.getX() + boll.getWidth() >= getX() && boll.getX() < getX() && boll.getY() + boll.getHeight() >= getY() && boll.getY() <= getY() + getHeight()) {
-		    if(boll.getxV() > 0) {
-		    	System.out.println("Vänster Studs");
-		    	boll.setxV(-Math.abs(boll.getxV()));
-		    }
-		}else if(boll.getX() <= getX() + getWidth() && boll.getX() + boll.getWidth() > getX() + getWidth() && boll.getY() + boll.getHeight() >= getY() && boll.getY() <= getY() + getHeight()) {
-		    if(boll.getxV() < 0) {
-		    	System.out.println("Höger Studs");
-		        boll.setxV(Math.abs(boll.getxV()));
-		    }
-		}
+		Rectangle batRekt = new Rectangle(getX(), getY(), getWidth(), getHeight());
+		Rectangle bollRekt = new Rectangle(boll.getX(), boll.getY(), boll.getWidth(), boll.getHeight());
+		
+		if(bollRekt.intersects(batRekt)) {
+			int batX = getX();
+            int batY = getY();
+            int batWidth = getWidth();
+            int batHeight = getHeight();
+            if (boll.getX() + boll.getWidth() - boll.getxV() <= batX) {
+                boll.setxV(-boll.getxV()); 
+            } else if (boll.getX() - boll.getxV() >= batX + batWidth) {
+                boll.setxV(-boll.getxV()); 
+            }else if (boll.getY() + boll.getHeight() - boll.getyV() <= batY) {
+                boll.setyV(-boll.getyV());
+            }else if (boll.getY() - boll.getyV() >= batY + batHeight) {
+                boll.setyV(-boll.getyV()); 
+            }
 
+		}
 	}
 	public void draw(Graphics2D graphics) {
 		graphics.setColor(color);
