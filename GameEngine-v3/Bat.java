@@ -19,21 +19,28 @@ public class Bat extends Sprite {
 			setX(getX()+7);
 		}
 		
-		if(boll.getX()<=getX()+getWidth() && boll.getX()>=getX() && (boll.getY())+boll.getWidth()>=getY()) {
-			boll.setyV(-boll.getyV());
-		}/*else if(boll.getY()<=getY()+getHeight() || boll.getY()+(boll.getWidth()) && boll.getY()>= getY() && boll.getX() == getX()+getWidth()) {
-			boll.setxV(-boll.getxV());
-		}*/
+		if(boll.getX() <= getX() + getWidth() && boll.getX() >= getX() && (boll.getY()) + boll.getHeight() >= getY()) { // getHeight() eventuellt. Här är problemet
+		    if(boll.getyV() > 0) {
+		    	boll.setyV(-boll.getyV());
+		    	System.out.println("Ovan Studs");
+		    }
+		}else if(boll.getX() + boll.getWidth() >= getX() && boll.getX() < getX() && boll.getY() + boll.getHeight() >= getY() && boll.getY() <= getY() + getHeight()) {
+		    if(boll.getxV() > 0) {
+		    	System.out.println("Vänster Studs");
+		    	boll.setxV(-Math.abs(boll.getxV()));
+		    }
+		}else if(boll.getX() <= getX() + getWidth() && boll.getX() + boll.getWidth() > getX() + getWidth() && boll.getY() + boll.getHeight() >= getY() && boll.getY() <= getY() + getHeight()) {
+		    if(boll.getxV() < 0) {
+		    	System.out.println("Höger Studs");
+		        boll.setxV(Math.abs(boll.getxV()));
+		    }
+		}
+
 	}
 	public void draw(Graphics2D graphics) {
 		graphics.setColor(color);
 		graphics.fillRect(getX(), getY(), getWidth(), getHeight());
 		graphics.setColor(color.WHITE);
 		graphics.drawString("LBLJ", getX()+23, getY()+9);
-	}
-	
-	public int getBat() {
-		getX();
-		return getX();
 	}
 }
