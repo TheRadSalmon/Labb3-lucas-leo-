@@ -14,12 +14,14 @@ public class Game {
 	public Game(GameBoard board) {
 	boll = new Boll(390,250,20,Color.ORANGE);
 	bat = new Bat(200, 550, 75, 10, Color.RED, boll);
-	fyrkanter = new SquareCollection(50, 0, 20, 20);
+	fyrkanter = new SquareCollection(50, 0, 20, 20, boll);
 	}
 
 	public void update(Keyboard keyboard) {
 	boll.update(keyboard, fyrkanter);
+	fyrkanter.update(keyboard, fyrkanter);
 	bat.update(keyboard, fyrkanter);
+	
 	}
 
 	public void draw(Graphics2D graphics) {
