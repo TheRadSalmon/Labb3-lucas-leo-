@@ -1,6 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.util.*;
+import java.util.*; //Kan eventuellt tas bort utan bekymmer
 import java.awt.*;
 import java.util.ArrayList;
 import java.awt.Graphics2D;
@@ -10,17 +10,19 @@ public class Game {
 	private Boll boll;
 	private Bat bat;
 	private SquareCollection fyrkanter;
+	public int bollStartX = 390;
+	public int bollStartY = 250;
 	
 	public Game(GameBoard board) {
-	boll = new Boll(390,250,20,Color.ORANGE);
+	boll = new Boll(bollStartX,bollStartY,20,Color.ORANGE); //Ändra alla magic numbers till variabler
 	bat = new Bat(200, 550, 75, 10, Color.RED, boll);
 	fyrkanter = new SquareCollection(50, 0, 55, 20, boll); 
 	}
 
 	public void update(Keyboard keyboard) {
-	boll.update(keyboard, fyrkanter);
+	boll.update(keyboard);
 	fyrkanter.update(keyboard, fyrkanter);
-	bat.update(keyboard, fyrkanter);
+	bat.update(keyboard);
 	
 	}
 
