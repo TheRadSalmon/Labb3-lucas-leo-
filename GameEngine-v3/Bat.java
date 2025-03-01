@@ -12,9 +12,9 @@ public class Bat extends Sprite {
 		this.boll = boll;
 	}
 	
-	public void update(Keyboard keyboard, SquareCollection square) {
+	public void update(Keyboard keyboard) {
 		if(keyboard.isKeyDown(Key.Left) == true && getX()>0) {
-			setX(getX()-7);
+			setX(getX()-7); // Magic numbers här
 		}
 		if(keyboard.isKeyDown(Key.Right) == true && getX()<725) {
 			setX(getX()+7);
@@ -43,7 +43,7 @@ public class Bat extends Sprite {
 	public void draw(Graphics2D graphics) {
 		graphics.setColor(color);
 		graphics.fillRect(getX(), getY(), getWidth(), getHeight());
-		graphics.setColor(color.WHITE);
+		graphics.setColor(color.WHITE); //Vad innebär detta?
 		graphics.drawString("LBLJ", getX()+23, getY()+9);
 	}
 }
