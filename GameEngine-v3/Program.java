@@ -15,7 +15,8 @@ public class Program extends JFrame {
 		add(board, BorderLayout.CENTER);
 		add(new JLabel("Highscore"), BorderLayout.WEST);
 		add(new JLabel("Latest runs"), BorderLayout.EAST);
-		setResizable(true);
+		add(new JLabel("Score: "), BorderLayout.NORTH); // Här vill jag försöka centrera och justera borderlayouten på mitt nuvarande score. 
+		setResizable(false);
 		pack();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
