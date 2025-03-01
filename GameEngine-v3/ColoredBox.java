@@ -9,7 +9,7 @@ public class ColoredBox extends Sprite {
 	}
 	
 	@Override
-	public void update(Keyboard keyboard) {
+	public void update(Keyboard keyboard, SquareCollection square) {
 	
 	}
 	
