@@ -6,14 +6,15 @@ import java.util.ArrayList;
 
 public class SquareCollection extends ColoredBox{
 	private ArrayList<ColoredBox> fyrkanter;
-	private Boll boll;  
+	private Boll boll;
+	private int score = 0;
 
 	public SquareCollection(int x, int y, int width, int height, Boll boll) {
 		super(x,y,width,height,Color.RED);
 		this.boll = boll; 
 		fyrkanter = new ArrayList<>(10);
 		for(int i = 0; i<10; i++) {
-				fyrkanter.add(new RedBox(x + i*75 ,y, 30, 30));
+				fyrkanter.add(new RedBox(x + i*75 ,y, width, height)); //Jag ändrade dessa variabler till width och height istället för magic numbers så att man även kan ändra ifrån game.
 		}
 	}
 	public void update(Keyboard keyboard, SquareCollection Square) {
@@ -28,7 +29,8 @@ public class SquareCollection extends ColoredBox{
 	            int fyrkantY = fyrkanter.get(i).getY();
 	            int fyrkantWidth = fyrkanter.get(i).getWidth();
 	            int fyrkantHeight = fyrkanter.get(i).getHeight();
-	            
+	            score++;
+	            System.out.println("Score: " + score); // Kodsnutt för att titta om poängen funkar, kan tas bort sen.
 	            fyrkanter.remove(i); 
 	            
 	            // vänster
@@ -57,13 +59,5 @@ public class SquareCollection extends ColoredBox{
 	        for (ColoredBox box : fyrkanter) {
 	            box.draw(graphics);
 	        }
-	}
-	
-	public ArrayList<ColoredBox> getFyrkanter(){
-		return fyrkanter;
-	}
-	
-	public void removeFyrkanter(ColoredBox box) {
-		fyrkanter.remove(box);
 	}
 }
