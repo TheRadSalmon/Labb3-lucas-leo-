@@ -9,15 +9,12 @@ import javax.swing.*;
 
 public class Program extends JFrame {
 	GameBoard board;
-	//JLabel scoreLabel;
-
+	
 	public Program() {
 		board = new GameBoard();
 		setLayout(new BorderLayout());
 		add(board, BorderLayout.CENTER);
-		add(new JLabel("Highscore: " ), BorderLayout.WEST);
-		//scoreLabel = new JLabel("Highscore: ");
-		//add(scoreLabel, BorderLayout.WEST);
+		add(new JLabel("Highscore: "), BorderLayout.WEST);
 		add(new JLabel("Latest runs: "), BorderLayout.EAST); 
 		setResizable(false);
 		pack();
@@ -25,10 +22,6 @@ public class Program extends JFrame {
 		setVisible(true);
 		board.start();
 	}
-
-	/*public void updateScore(int score) {
-		scoreLabel.setText("Highscore: " + score);
-	}*/
 	
 	@Override
 	protected void processKeyEvent(KeyEvent e) {
