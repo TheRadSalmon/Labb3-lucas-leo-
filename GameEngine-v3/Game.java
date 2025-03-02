@@ -13,6 +13,7 @@ public class Game {
 	private SquareCollection fyrkanter2;
 	public int bollStartX = 390;
 	public int bollStartY = 250;
+	private int totalScore = 0;
 	
 	public Game(GameBoard board) {
 	boll = new Boll(bollStartX,bollStartY,20,Color.ORANGE); //Ändra alla magic numbers till variabler
@@ -27,6 +28,8 @@ public class Game {
 	fyrkanter2.update(keyboard, fyrkanter2);
 	bat.update(keyboard);
 	
+	totalScore = fyrkanter.getScore() + fyrkanter2.getScore(); 
+	boll.setTotalScore(totalScore);
 	}
 
 	public void draw(Graphics2D graphics) {
@@ -34,5 +37,7 @@ public class Game {
 	bat.draw(graphics);
 	fyrkanter.draw(graphics);
 	fyrkanter2.draw(graphics);
+	 graphics.drawString("Total Poäng: " + totalScore, 390, 545);
 	}
+
 }
