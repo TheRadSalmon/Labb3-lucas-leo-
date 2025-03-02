@@ -50,13 +50,14 @@ public class Boll extends Sprite {
 	boll = null;
 	}
 	
+	public void resetLiv() {
+		lives.setLives(3);
+	}
 	
 
 @Override
 public void update(Keyboard keyboard){
 	tickcount++;
-	/*if(keyboard.isKeyDown(Key.Space) &&lives.getLives() <=0) {
-	}*/
 	if(keyboard.isKeyDown(Key.Enter) && lives.getLives() > 0 && getX() == bollStartX && getY() == bollStartY) {
 		int rand = (int)(Math.random()*7)+4;
 		xV = rand;
