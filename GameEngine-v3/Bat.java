@@ -1,4 +1,5 @@
 import java.awt.Graphics2D;
+import java.awt.Font;
 import java.awt.Color;
 import java.awt.Rectangle;
 
@@ -42,6 +43,7 @@ public class Bat extends Sprite {
 	}
 	public void draw(Graphics2D graphics) {
 		graphics.setColor(color);
+		graphics.setFont(new Font("Arial", Font.BOLD, 11));
 		graphics.fillRect(getX(), getY(), getWidth(), getHeight());
 		graphics.setColor(color.WHITE); //Vad innebär detta?
 		graphics.drawString("LBLJ", getX()+23, getY()+9);
