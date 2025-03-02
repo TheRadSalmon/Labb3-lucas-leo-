@@ -9,6 +9,7 @@ import java.util.*;
 public class Game {
 	private Boll boll;
 	private Bat bat;
+	private Lives lives;
 	private SquareCollection fyrkanter;
 	private SquareCollection fyrkanter2;
 	public int bollStartX = 390;
@@ -30,7 +31,16 @@ public class Game {
 	
 	totalScore = fyrkanter.getScore() + fyrkanter2.getScore(); 
 	boll.setTotalScore(totalScore);
+	
+	if(boll.returnLives() <= 0) {
+		fyrkanter.clearSquares();
+		fyrkanter2.clearSquares();
 	}
+		if(keyboard.isKeyDown(Key.Space) && boll.returnLives()<=0) {
+			fyrkanter = new SquareCollection(50, 0, 55, 20, boll);
+			fyrkanter2 = new SquareCollection(50, 100, 55, 20, boll);
+	}
+}
 
 	public void draw(Graphics2D graphics) {
 	boll.draw(graphics);
