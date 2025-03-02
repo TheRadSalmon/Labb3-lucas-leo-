@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 public class Boll extends Sprite {
+	private Boll boll;
 	private int tickcount = 0;
 	private Color color;
 	public int xV = 0;
@@ -40,11 +41,23 @@ public class Boll extends Sprite {
 		setX(bollStartX);
 		setY(bollStartY);
 	}
+	
+	public int returnLives() {
+		return lives.getLives();
+	}
+	
+	public void clearBoll(Boll boll) {
+	boll = null;
+	}
+	
+	
 
 @Override
 public void update(Keyboard keyboard){
 	tickcount++;
-	if(keyboard.isKeyDown(Key.Enter) && lives.getLives() > 0) {
+	/*if(keyboard.isKeyDown(Key.Space) &&lives.getLives() <=0) {
+	}*/
+	if(keyboard.isKeyDown(Key.Enter) && lives.getLives() > 0 && getX() == bollStartX && getY() == bollStartY) {
 		int rand = (int)(Math.random()*7)+4;
 		xV = rand;
 		yV = -rand;
@@ -69,8 +82,6 @@ public void update(Keyboard keyboard){
 			yV = 0;
 			
 		}
-		System.out.println("Liv: " + lives.getLives());
-		
 	}
 	
 	if(tickcount % 1 == 0) {
@@ -90,14 +101,9 @@ public void draw(Graphics2D graphics) {
 		 graphics.drawString("Antal liv: " + lives.getLives(), 390, 530);
 		 if(lives.getLives()<=0) {
 			 graphics.setFont(new Font("Arial", Font.BOLD, 100));
+			 graphics.drawString("GAME OVER",125, 300);
 
 		 }
-		 
 }
-
-@Override
-public void update(Keyboard keyboard, SquareCollection square) {
-	// TODO Auto-generated method stub
+}
 	
-}
-}
