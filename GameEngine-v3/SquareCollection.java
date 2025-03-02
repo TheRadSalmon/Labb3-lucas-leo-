@@ -4,28 +4,27 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
+
 
 
 public class SquareCollection extends ColoredBox{
 	private ArrayList<ColoredBox> fyrkanter;
 	private Boll boll;
-	//private Score score;
-	//private Program program;
+	private int score = 0;
+	private Color color;
+	private int rand = (int)(Math.random()*3)+1;
+	private String colorvar = "RED";
 
+	
 	public SquareCollection(int x, int y, int width, int height, Boll boll) {
 		super(x,y,width,height,Color.RED);
 		this.boll = boll; 
-		//this.program = program;
 		fyrkanter = new ArrayList<>(10);
-		//score = new Score(0);
 		for(int i = 0; i<10; i++) {
-				fyrkanter.add(new RedBox(x + i*75 ,y, width, height)); //Jag ändrade dessa variabler till width och height istället för magic numbers så att man även kan ändra ifrån game.
+				fyrkanter.add(new ColoredBox(x + i*75 ,y, width, height, color.RED)); //Jag ändrade dessa variabler till width och height istället för magic numbers så att man även kan ändra ifrån game.
 		}
 	}
-	
-	/*public Score getScore() {
-		return score;
-	}*/
 	
 	public void update(Keyboard keyboard, SquareCollection Square) {
 
@@ -40,10 +39,9 @@ public class SquareCollection extends ColoredBox{
 	            int fyrkantWidth = fyrkanter.get(i).getWidth();
 	            int fyrkantHeight = fyrkanter.get(i).getHeight();
 	            
-	            //score.setScore(score.getScore()+1);
-	            //System.out.println("Score: " + score.getScore()); // Kodsnutt för att titta om poängen funkar, kan tas bort sen.
+	            score++;
+	            System.out.println("Score: " + score); // Kodsnutt för att titta om poängen funkar, kan tas bort sen.
 	            fyrkanter.remove(i);
-	            //program.updateScore(score.getScore());
 	            
 	            // vänster
 	            if (boll.getX() + boll.getWidth() - boll.getxV() <= fyrkantX) {
