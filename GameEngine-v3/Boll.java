@@ -6,7 +6,7 @@ public class Boll extends Sprite {
 	private Color color;
 	public int xV = 0;
 	public int yV = 0;
-	
+	private int totalScore  = 0; 
 
 	public int bollStartX = 390;
 	public int bollStartY = 250;
@@ -18,6 +18,10 @@ public class Boll extends Sprite {
 	 super(x,y,diameter,diameter);
 	 this.color = color;
 }
+	
+	public void setTotalScore(int totalScore) {
+		this.totalScore = totalScore; 
+	}
 
 	public int getxV(){
 		return xV;
@@ -86,9 +90,14 @@ public void draw(Graphics2D graphics) {
 		 graphics.drawString("Antal liv: " + lives.getLives(), 390, 530);
 		 if(lives.getLives()<=0) {
 			 graphics.setFont(new Font("Arial", Font.BOLD, 100));
-			 graphics.drawString("GAME OVER", 100, 350);
-			 graphics.setFont(new Font("Arial", Font.PLAIN, 35));
-			 //graphics.drawString("Poäng: "+ score, 150, 400);
+
 		 }
+		 
+}
+
+@Override
+public void update(Keyboard keyboard, SquareCollection square) {
+	// TODO Auto-generated method stub
+	
 }
 }
