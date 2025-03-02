@@ -27,6 +27,17 @@ public class SquareCollection{
 				}
 		}
 	}
+	public Color getColor(int hitsRequired) {
+		if(hitsRequired == 1) {
+			return Color.GREEN;
+		}else if(hitsRequired == 2) {
+			return Color.YELLOW;
+		}else if(hitsRequired == 3) {
+		return Color.RED;
+		}else {
+			return Color.GRAY;
+		}
+}
 	
 	public int getScore() {
 		return score;
@@ -47,11 +58,19 @@ public class SquareCollection{
 	            int fyrkantWidth = fyrkanter.get(i).getWidth();
 	            int fyrkantHeight = fyrkanter.get(i).getHeight();
 	            
-	            if(fyrkant.isDestroyed() == true) {
+	            if(fyrkant.getColor() == Color.GREEN) {
+	            	score++;
+	            }
+	            if(fyrkant.getColor() == Color.YELLOW) {
+	            	score = score +5;
+	            }
+	            if(fyrkant.getColor() == Color.RED) {
+	            	score = score +10;
+	            }
+	            
+	            if(fyrkant.isDestroyed()) {
 	            	fyrkanter.remove(i);
 	            }
-	            score++;
-	            System.out.println("Score: " + score); // Kodsnutt för att titta om poängen funkar, kan tas bort sen.
 	            
 	            // vänster
 	            if (boll.getX() + boll.getWidth() - boll.getxV() <= fyrkantX) {
@@ -73,11 +92,13 @@ public class SquareCollection{
 	        }
 	    }
 	}
+	public void clearSquares() {
+		fyrkanter.clear();
+	}
 	
 	public void draw(Graphics2D graphics) {
 	        for (ColoredBox box : fyrkanter) {
 	            box.draw(graphics);
 	        }
-	        graphics.drawString("Poäng: " + score, 390, 545);
 	}
 }
