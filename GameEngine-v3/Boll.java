@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 public class Boll extends Sprite {
 	private int tickcount = 0;
@@ -79,8 +80,15 @@ public void update(Keyboard keyboard){
 
 @Override
 public void draw(Graphics2D graphics) {
-	 graphics.setColor(color);
-	 graphics.fillOval(getX(),getY(),getWidth(),getHeight());
-	 graphics.drawString("Antal liv: " + lives.getLives(), 390, 530);
+		 graphics.setColor(color);
+		 graphics.setFont(new Font("Arial", Font.BOLD, 11));
+		 graphics.fillOval(getX(),getY(),getWidth(),getHeight());
+		 graphics.drawString("Antal liv: " + lives.getLives(), 390, 530);
+		 if(lives.getLives()<=0) {
+			 graphics.setFont(new Font("Arial", Font.BOLD, 100));
+			 graphics.drawString("GAME OVER", 100, 350);
+			 graphics.setFont(new Font("Arial", Font.PLAIN, 35));
+			 //graphics.drawString("Poäng: "+ score, 150, 400);
+		 }
 }
 }
