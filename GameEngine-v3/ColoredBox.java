@@ -25,6 +25,10 @@ public class ColoredBox extends Sprite {
 		}
 	}
 	
+	public Color getColor() {
+		return this.color;
+	}
+	
 	public boolean isDestroyed() {
 		return hitsRequired<=0;
 	}
