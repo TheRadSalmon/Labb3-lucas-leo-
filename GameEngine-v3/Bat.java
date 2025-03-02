@@ -45,7 +45,7 @@ public class Bat extends Sprite {
 		graphics.setColor(color);
 		graphics.setFont(new Font("Arial", Font.BOLD, 11));
 		graphics.fillRect(getX(), getY(), getWidth(), getHeight());
-		graphics.setColor(color.WHITE); //Vad innebär detta?
+		graphics.setColor(color.WHITE);
 		graphics.drawString("LBLJ", getX()+23, getY()+9);
 	}
 }
