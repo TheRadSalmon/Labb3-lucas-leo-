@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class SquareCollection{
 	private ArrayList<ColoredBox> fyrkanter;
 	private Boll boll;
-	private int score = 0;
+	private ScoreClass score = new ScoreClass();
 	
 	public SquareCollection(int x, int y, int width, int height, Boll boll) {
 		this.boll = boll; 
@@ -35,10 +35,10 @@ public class SquareCollection{
 			return Color.GRAY;
 		}
 }
-	
 	public int getScore() {
-		return score;
+		return score.getTempScore();
 	}
+
 	public void update(Keyboard keyboard, SquareCollection Square) {
 
 	    for (int i = fyrkanter.size() - 1; i >= 0; i--) {
@@ -56,13 +56,13 @@ public class SquareCollection{
 	            int fyrkantHeight = fyrkanter.get(i).getHeight();
 	            
 	            if(fyrkant.getColor() == Color.GREEN) {
-	            	score++;
+	            	score.addPoints(1);
 	            }
 	            if(fyrkant.getColor() == Color.YELLOW) {
-	            	score = score +5;
+	            	score.addPoints(5);
 	            }
 	            if(fyrkant.getColor() == Color.RED) {
-	            	score = score +10;
+	            	score.addPoints(10);
 	            }
 	            
 	            if(fyrkant.isDestroyed()) {
@@ -93,6 +93,7 @@ public class SquareCollection{
 	public boolean isEmpty() {
 		return fyrkanter.isEmpty();
 	}
+	
 	public void clearSquares() {
 		fyrkanter.clear();
 	}
