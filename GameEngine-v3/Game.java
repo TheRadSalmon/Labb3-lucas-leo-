@@ -25,7 +25,7 @@ public class Game {
 	fyrkanter2 = new SquareCollection(50, 100, 55, 20, boll);
 	}
 
-	public void update(Keyboard keyboard) {
+	public void update(Keyboard keyboard, Program program) {
 	boll.update(keyboard);
 	fyrkanter.update(keyboard, fyrkanter);
 	fyrkanter2.update(keyboard, fyrkanter2);
@@ -41,6 +41,7 @@ public class Game {
 			fyrkanter = new SquareCollection(50, 0, 55, 20, boll);
 			fyrkanter2 = new SquareCollection(50, 100, 55, 20, boll);
 			boll.resetLiv();
+			tempScore = 0;
 		}
 	if(fyrkanter.isEmpty() && fyrkanter2.isEmpty() && boll.returnLives()>0) {
 		boll.resetPos();
@@ -60,7 +61,12 @@ public class Game {
 	}
 	fyrkanter.draw(graphics);
 	fyrkanter2.draw(graphics);
-	 graphics.drawString("Total Poäng: " + totalScore, 390, 545);
+	graphics.setColor(Color.WHITE);
+	graphics.drawString("Total Poäng: " + totalScore, 390, 545);
 	}
 	
+	public int returnTotalScore() {
+		return totalScore;
+	}
+
 }
