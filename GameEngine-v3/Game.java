@@ -16,6 +16,8 @@ public class Game {
 	private int totalScore = 0;
 	private int tempScore = 0;
 	
+
+	
 	public Game(GameBoard board) {
 	boll = new Boll(bollStartX,bollStartY,20,Color.ORANGE); //Ändra alla magic numbers till variabler
 	bat = new Bat(200, 550, 75, 10, Color.RED, boll);
@@ -30,7 +32,6 @@ public class Game {
 	bat.update(keyboard);
 	
 	totalScore = fyrkanter.getScore() + fyrkanter2.getScore() + tempScore; 
-	boll.setTotalScore(totalScore);
 	
 	if(boll.returnLives() <= 0) {
 		fyrkanter.clearSquares();
@@ -38,7 +39,7 @@ public class Game {
 	}
 		if(keyboard.isKeyDown(Key.Space) && boll.returnLives()<=0) {
 			fyrkanter = new SquareCollection(50, 0, 55, 20, boll);
-			fyrkanter2 = new SquareCollection(50, 100, 55, 20, boll); //Objektet boll startas inte och på grund av det så får man inga fler liv. Därför startas inte programmet
+			fyrkanter2 = new SquareCollection(50, 100, 55, 20, boll);
 			boll.resetLiv();
 		}
 	if(fyrkanter.isEmpty() && fyrkanter2.isEmpty() && boll.returnLives()>0) {
@@ -61,5 +62,5 @@ public class Game {
 	fyrkanter2.draw(graphics);
 	 graphics.drawString("Total Poäng: " + totalScore, 390, 545);
 	}
-
+	
 }
