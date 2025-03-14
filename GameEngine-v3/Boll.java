@@ -7,7 +7,7 @@ public class Boll extends Sprite {
 	private Color color;
 	public int xV = 0;
 	public int yV = 0;
-	private int totalScore  = 0; 
+	//Skapa scoreobjekt för hantering av poäng
 
 	public int bollStartX = 390;
 	public int bollStartY = 250;
@@ -19,10 +19,6 @@ public class Boll extends Sprite {
 	 super(x,y,diameter,diameter);
 	 this.color = color;
 }
-	
-	public void setTotalScore(int totalScore) {
-		this.totalScore = totalScore; 
-	}
 
 	public int getxV(){
 		return xV;
