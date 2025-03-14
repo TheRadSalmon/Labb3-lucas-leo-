@@ -1,13 +1,15 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 import javax.swing.JComponent;
 
 public class GameBoard extends JComponent {
 	private final int FPS = 40; 
+	private int gameScore = 0;
 	private Game game;
 	private Keyboard keyboard;
-	public GameBoard() {
+	private Program program;
+	public GameBoard(Program program) {
+		this.program = program;
 		keyboard = new Keyboard();
 		game = new Game(this);
 	}
@@ -38,7 +40,10 @@ public class GameBoard extends JComponent {
 
 	public void start() {
 		while(true) {
-			game.update(keyboard);
+			game.update(keyboard, program);
+			gameScore = game.returnTotalScore();
+			//System.out.println("GameScore: " + gameScore);
+			program.updateScore(gameScore);
 			try {
 				Thread.sleep(1000 / FPS); //Throttle thread
 			} catch (InterruptedException e) {
