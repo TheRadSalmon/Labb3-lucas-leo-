@@ -20,7 +20,7 @@ public class ColoredBox extends Sprite {
 	}
 	
 	public void hit() {
-		if(hitsRequired>0) {
+		if(hitsRequired>Variables.boxDestroyed) {
 			hitsRequired--;	
 		}
 	}
@@ -30,12 +30,18 @@ public class ColoredBox extends Sprite {
 	}
 	
 	public boolean isDestroyed() {
-		return hitsRequired<=0;
+		return hitsRequired<=Variables.boxDestroyed;
 	}
 	
 	@Override
 	public void draw(Graphics2D graphics) {
 		graphics.setColor(color);
 		graphics.fillRect(getX(), getY(), getWidth(), getHeight());
+	}
+
+	@Override
+	public void update(Keyboard keyboard, SquareCollection square) {
+		// TODO Auto-generated method stub
+		
 	}
 }
