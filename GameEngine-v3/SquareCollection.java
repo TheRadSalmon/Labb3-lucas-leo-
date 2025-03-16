@@ -12,24 +12,24 @@ public class SquareCollection{
 	
 	public SquareCollection(int x, int y, int width, int height, Boll boll) {
 		this.boll = boll; 
-		fyrkanter = new ArrayList<>(10);
-		for(int i = 0; i<10; i++) {
-				int hitsRequired = (int)(Math.random() *3)+1;
-				if(hitsRequired == 1) {
-					fyrkanter.add(new GreenBox(x + i*75 ,y, width, height, hitsRequired));
-				}else if(hitsRequired == 2) {
-					fyrkanter.add(new YellowBox(x + i*75 ,y, width, height, hitsRequired));
-				}else if(hitsRequired == 3) {
-					fyrkanter.add(new RedBox(x + i*75 ,y, width, height, hitsRequired));
+		fyrkanter = new ArrayList<>(Variables.antalRutor);
+		for(int i = Variables.startIndex; i<Variables.antalRutor; i++) {
+				int hitsRequired = (int)(Math.random() *Variables.maxStuds)+Variables.minStuds;
+				if(hitsRequired == Variables.greenHit) {
+					fyrkanter.add(new GreenBox(x + i*Variables.mellanRum ,y, width, height, hitsRequired));
+				}else if(hitsRequired == Variables.yellowHit) {
+					fyrkanter.add(new YellowBox(x + i*Variables.mellanRum ,y, width, height, hitsRequired));
+				}else if(hitsRequired == Variables.redHit) {
+					fyrkanter.add(new RedBox(x + i*Variables.mellanRum ,y, width, height, hitsRequired));
 				}
 		}
 	}
 	public Color getColor(int hitsRequired) {
-		if(hitsRequired == 1) {
+		if(hitsRequired == Variables.greenHit) {
 			return Color.GREEN;
-		}else if(hitsRequired == 2) {
+		}else if(hitsRequired == Variables.yellowHit) {
 			return Color.YELLOW;
-		}else if(hitsRequired == 3) {
+		}else if(hitsRequired == Variables.redHit) {
 		return Color.RED;
 		}else {
 			return Color.GRAY;
@@ -41,7 +41,7 @@ public class SquareCollection{
 
 	public void update(Keyboard keyboard, SquareCollection Square) {
 
-	    for (int i = fyrkanter.size() - 1; i >= 0; i--) {
+	    for (int i = fyrkanter.size() - Variables.sistaIndex; i >= Variables.startIndex; i--) { 
 	    	ColoredBox fyrkant = fyrkanter.get(i);
 	    	
 	        Rectangle bollrektangel = new Rectangle(boll.getX(), boll.getY(), boll.getWidth(), boll.getHeight());
@@ -56,13 +56,13 @@ public class SquareCollection{
 	            int fyrkantHeight = fyrkanter.get(i).getHeight();
 	            
 	            if(fyrkant.getColor() == Color.GREEN) {
-	            	score.addPoints(1);
+	            	score.addPoints(Variables.greenPoint);
 	            }
 	            if(fyrkant.getColor() == Color.YELLOW) {
-	            	score.addPoints(5);
+	            	score.addPoints(Variables.yellowPoint);
 	            }
 	            if(fyrkant.getColor() == Color.RED) {
-	            	score.addPoints(10);
+	            	score.addPoints(Variables.redPoint);
 	            }
 	            
 	            if(fyrkant.isDestroyed()) {
