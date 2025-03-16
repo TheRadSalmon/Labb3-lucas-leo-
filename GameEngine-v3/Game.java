@@ -11,18 +11,15 @@ public class Game {
 	private Bat bat;
 	private SquareCollection fyrkanter;
 	private SquareCollection fyrkanter2;
-	public int bollStartX = 390;
-	public int bollStartY = 250;
-	private int totalScore = 0;
-	private int tempScore = 0;
-	
 
+	private int totalScore = Variables.gameTotalScore;
+	private int tempScore = Variables.gameTempScore;
 	
 	public Game(GameBoard board) {
-	boll = new Boll(bollStartX,bollStartY,20,Color.ORANGE); //Ändra alla magic numbers till variabler
-	bat = new Bat(200, 550, 75, 10, Color.RED, boll);
-	fyrkanter = new SquareCollection(50, 0, 55, 20, boll); 
-	fyrkanter2 = new SquareCollection(50, 100, 55, 20, boll);
+	boll = new Boll(Variables.bollStartX,Variables.bollStartY,Variables.bollRadius,Color.ORANGE); 
+	bat = new Bat(Variables.bat_X, Variables.bat_Y, Variables.bat_Width, Variables.bat_Height, Color.RED, boll);
+	fyrkanter = new SquareCollection(Variables.fyrkant_X, Variables.fyrkant_Y1, Variables.fyrkant_Widht, Variables.fyrkant_Height, boll); 
+	fyrkanter2 = new SquareCollection(Variables.fyrkant_X, Variables.fyrkant_Y2, Variables.fyrkant_Widht, Variables.fyrkant_Height, boll);
 	}
 
 	public void update(Keyboard keyboard, Program program) {
@@ -33,22 +30,22 @@ public class Game {
 	
 	totalScore = fyrkanter.getScore() + fyrkanter2.getScore() + tempScore; 
 	
-	if(boll.returnLives() <= 0) {
+	if(boll.returnLives() <= Variables.death) {
 		fyrkanter.clearSquares();
 		fyrkanter2.clearSquares();
 	}
-		if(keyboard.isKeyDown(Key.Space) && boll.returnLives()<=0) {
-			fyrkanter = new SquareCollection(50, 0, 55, 20, boll);
-			fyrkanter2 = new SquareCollection(50, 100, 55, 20, boll);
+		if(keyboard.isKeyDown(Key.Space) && boll.returnLives()<=Variables.death) {
+			fyrkanter = new SquareCollection(Variables.fyrkant_X, Variables.fyrkant_Y1, Variables.fyrkant_Widht, Variables.fyrkant_Height, boll); 
+			fyrkanter2 = new SquareCollection(Variables.fyrkant_X, Variables.fyrkant_Y2, Variables.fyrkant_Widht, Variables.fyrkant_Height, boll);
 			boll.resetLiv();
 			tempScore = 0;
 		}
-	if(fyrkanter.isEmpty() && fyrkanter2.isEmpty() && boll.returnLives()>0) {
+	if(fyrkanter.isEmpty() && fyrkanter2.isEmpty() && boll.returnLives()>Variables.death) {
 		boll.resetPos();
-		if(keyboard.isKeyDown(Key.Up) && boll.returnLives()>0) {
+		if(keyboard.isKeyDown(Key.Up) && boll.returnLives()>Variables.death) {
 			tempScore = totalScore;
-			fyrkanter = new SquareCollection(50, 0, 55, 20, boll);
-			fyrkanter2 = new SquareCollection(50, 100, 55, 20, boll);
+			fyrkanter = new SquareCollection(Variables.fyrkant_X, Variables.fyrkant_Y1, Variables.fyrkant_Widht, Variables.fyrkant_Height, boll); 
+			fyrkanter2 = new SquareCollection(Variables.fyrkant_X, Variables.fyrkant_Y2, Variables.fyrkant_Widht, Variables.fyrkant_Height, boll);
 		}
 	}
 }
@@ -56,13 +53,13 @@ public class Game {
 	public void draw(Graphics2D graphics) {
 	boll.draw(graphics);
 	bat.draw(graphics);
-	if(fyrkanter.isEmpty() && fyrkanter2.isEmpty() && boll.returnLives()>0) {
-		graphics.drawString("Klicka pil upp för att fortsätta", 390, 450);
+	if(fyrkanter.isEmpty() && fyrkanter2.isEmpty() && boll.returnLives()>Variables.death) {
+		graphics.drawString("Klicka pil upp för att fortsätta", Variables.levaText_X, Variables.levaText_Y);
 	}
 	fyrkanter.draw(graphics);
 	fyrkanter2.draw(graphics);
 	graphics.setColor(Color.WHITE);
-	graphics.drawString("Total Poäng: " + totalScore, 390, 545);
+	graphics.drawString("Total Poäng: " + totalScore, Variables.scoreText_X, Variables.scoreText_Y);
 	}
 	
 	public int returnTotalScore() {
