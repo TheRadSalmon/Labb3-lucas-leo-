@@ -14,11 +14,11 @@ public class Bat extends Sprite {
 	}
 	
 	public void update(Keyboard keyboard) {
-		if(keyboard.isKeyDown(Key.Left) == true && getX()>0) {
-			setX(getX()-7); // Magic numbers här
+		if(keyboard.isKeyDown(Key.Left) == true && getX()>Variables.leftWall) {
+			setX(getX()-Variables.batSpeed); 
 		}
-		if(keyboard.isKeyDown(Key.Right) == true && getX()<725) {
-			setX(getX()+7);
+		if(keyboard.isKeyDown(Key.Right) == true && getX()<Variables.rightWall) {
+			setX(getX()+Variables.batSpeed);
 		}
 		
 		Rectangle batRekt = new Rectangle(getX(), getY(), getWidth(), getHeight());
@@ -43,9 +43,15 @@ public class Bat extends Sprite {
 	}
 	public void draw(Graphics2D graphics) {
 		graphics.setColor(color);
-		graphics.setFont(new Font("Arial", Font.BOLD, 11));
+		graphics.setFont(new Font("Arial", Font.BOLD, Variables.batFontStorlek));
 		graphics.fillRect(getX(), getY(), getWidth(), getHeight());
 		graphics.setColor(color.WHITE);
-		graphics.drawString("LBLJ", getX()+23, getY()+9);
+		graphics.drawString("LBLJ", getX()+Variables.batText_X, getY()+Variables.batText_Y);
+	}
+
+	@Override
+	public void update(Keyboard keyboard, SquareCollection square) {
+		// TODO Auto-generated method stub
+		
 	}
 }
