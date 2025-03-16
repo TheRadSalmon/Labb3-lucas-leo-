@@ -3,17 +3,14 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 public class Boll extends Sprite {
 	private Boll boll;
-	private int tickcount = 0;
+	private int tickcount = Variables.tickcount; 
 	private Color color;
-	public int xV = 0;
-	public int yV = 0;
+	public int xV = Variables.bollStart_xV;
+	public int yV = Variables.bollStart_yV;
 	//Skapa scoreobjekt för hantering av poäng
-
-	public int bollStartX = 390;
-	public int bollStartY = 250;
-	private int temp = 0;
+	private int temp = Variables.bollTemp;
 	
-	Lives lives = new Lives(3);
+	Lives lives = new Lives(Variables.bollLiv);
 	
 	public Boll(int x, int y, int diameter, Color color) {
 	 super(x,y,diameter,diameter);
@@ -34,8 +31,8 @@ public class Boll extends Sprite {
 	}
 	
 	public void resetPos() {
-		setX(bollStartX);
-		setY(bollStartY);
+		setX(Variables.bollStartX);
+		setY(Variables.bollStartY);
 	}
 	
 	public int returnLives() {
@@ -47,41 +44,43 @@ public class Boll extends Sprite {
 	}
 	
 	public void resetLiv() {
-		lives.setLives(3);
+		lives.setLives(Variables.bollLiv);
 	}
 	
 
 @Override
 public void update(Keyboard keyboard){
 	tickcount++;
-	if(keyboard.isKeyDown(Key.Enter) && lives.getLives() > 0 && getX() == bollStartX && getY() == bollStartY) {
-		int rand = (int)(Math.random()*7)+4;
+	
+	if(keyboard.isKeyDown(Key.Enter) && lives.getLives() > Variables.death && getX() == Variables.bollStartX && getY() == Variables.bollStartY) {
+		int rand = (int)(Math.random()*Variables.bollmax_xV)+Variables.bollmin_xV;
 		xV = rand;
 		yV = -rand;
 	}
-	if(getX() <= 0 && getY()>0) {
+	if(getX() <= Variables.bollLeftWall && getY()>Variables.bollTopWall) {
 		xV = Math.abs(xV);
-	}else if(getX()>=780 && getY()>0) {
+	}else if(getX()>=Variables.bollRightWall && getY()>Variables.bollTopWall) {
 		xV = -Math.abs(xV);
-	}else if(getX()!=0 && getX()!= 780 && getY()<=0) {
+	}else if(getX()!=Variables.bollLeftWall && getX()!= Variables.bollRightWall && getY()<=Variables.bollTopWall) {
 		yV = Math.abs(yV);
-	}else if(getY() >=580 && lives.getLives()>0) {
+	}else if(getY() >=Variables.bollBottomWall && lives.getLives()>Variables.death) {
 		temp = lives.getLives();
-		lives.setLives(lives.getLives()-1);
-		if(temp > lives.getLives() && lives.getLives()>0) {
+		lives.setLives(lives.getLives()-Variables.minusLiv);
+		if(temp > lives.getLives() && lives.getLives()>Variables.death) {
 			resetPos();
-			xV = 0;
-			yV = 0;
+			xV = Variables.bollStart_xV;
+			yV = Variables.bollStart_yV;
 		}
+		
 		resetPos();
-		if(lives.getLives() <= 0) {
-			xV = 0;
-			yV = 0;
+		if(lives.getLives() <= Variables.death) {
+			xV = Variables.bollStart_xV;
+			yV = Variables.bollStart_yV;	
 			
 		}
 	}
 	
-	if(tickcount % 1 == 0) {
+	if(tickcount % Variables.tickcountTick == Variables.tickcountCompare) {
 		setX(getX()+ xV);
 		setY(getY()+ yV);
 	}
@@ -93,14 +92,19 @@ public void update(Keyboard keyboard){
 @Override
 public void draw(Graphics2D graphics) {
 		 graphics.setColor(color);
-		 graphics.setFont(new Font("Arial", Font.BOLD, 11));
+		 graphics.setFont(new Font("Arial", Font.BOLD, Variables.bollLivFontStorlek));
 		 graphics.fillOval(getX(),getY(),getWidth(),getHeight());
-		 graphics.drawString("Antal liv: " + lives.getLives(), 390, 530);
-		 if(lives.getLives()<=0) {
-			 graphics.setFont(new Font("Arial", Font.BOLD, 100));
-			 graphics.drawString("GAME OVER",125, 300);
+		 graphics.drawString("Antal liv: " + lives.getLives(), Variables.livText_X, Variables.livText_Y);
+		 if(lives.getLives()<=Variables.death) {
+			 graphics.setFont(new Font("Arial", Font.BOLD, Variables.gameOverFontStorlek));
+			 graphics.drawString("GAME OVER",Variables.gameover_X, Variables.gameover_Y);
 
 		 }
 }
-}
+
+@Override
+public void update(Keyboard keyboard, SquareCollection square) {
+	// TODO Auto-generated method stub
 	
+}
+}
