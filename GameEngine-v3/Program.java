@@ -8,17 +8,48 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 public class Program extends JFrame {
-	GameBoard board;
+	private GameBoard board;
 	private int score = 0;
-	private JLabel scoreLabel;
+	private JLabel highScoreLabel;
+	private HighScore highScores;
+	private ScoreLogik scoreLogik;
+	private String namn = "Leo";
+	private JPanel highPanel;
+	private JPanel runPanel;
+	private JLabel[] highLabel;
+	private JLabel[] runLabel;	
+	
 	public Program() {
+		highScores = new HighScore();
 		board = new GameBoard(this);
-		setLayout(new BorderLayout(30, 40));
-		scoreLabel = new JLabel("Highscore" + score);
-		add(board, BorderLayout.CENTER);
-		add(scoreLabel,BorderLayout.WEST);
+		scoreLogik = new ScoreLogik(score, namn);
+		highPanel = new JPanel();
+		runPanel = new JPanel();
 		
-		add(new JLabel("Latest runs: "), BorderLayout.EAST);
+		setLayout(new BorderLayout(30, 40));
+		
+		highPanel.setLayout(new BoxLayout(highPanel, BoxLayout.Y_AXIS));
+		runPanel.setLayout(new BoxLayout(runPanel, BoxLayout.Y_AXIS));
+		
+		highPanel.add(new JLabel("Highscore"), BorderLayout.WEST);
+		runPanel.add(new JLabel("Latest runs"), BorderLayout.EAST);
+		
+		add(board, BorderLayout.CENTER);
+		add(highPanel,BorderLayout.WEST);
+		add(runPanel,BorderLayout.EAST);
+		
+		highLabel = new JLabel[10];
+		for(int i = 0; i<10; i++) {
+			highLabel[i] = new JLabel("--");
+			highPanel.add(highLabel[i]);
+		}
+		
+		runLabel = new JLabel[3];
+		for(int i = 0; i<3; i++) {
+			runLabel[i] = new JLabel("--");
+			runPanel.add(runLabel[i]);
+		}
+		
 		setResizable(false);
 		pack();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -28,7 +59,8 @@ public class Program extends JFrame {
 	
 	public void updateScore(int newScore) {
 		score = newScore;
-		scoreLabel.setText("Highscore" + score);
+		highScores.addTenScores(score);
+		//System.out.println("Scorelogik var:" + score);
 	}
 
 	@Override
