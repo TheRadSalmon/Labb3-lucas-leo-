@@ -6,6 +6,9 @@ public class Variables {
 	public static int bollStartY = 250;
 	public static int bollRadius = 20; 
 	
+	public static int gameTotalScore = 0; 
+	public static int gameTempScore = 0; 
+	
 	//Bat variablar: 
     public static int bat_X = 200;
     public static int bat_Y = 550;
@@ -61,6 +64,9 @@ public class Variables {
     public static int batFontStorlek = 11;
     public static int batText_X = 23;
     public static int batText_Y = 9;
+   
+//ColoredBox.java 
+    public static int boxDestroyed = 0; 
     
 //Boll.java:
     
