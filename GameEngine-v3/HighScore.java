@@ -26,6 +26,7 @@ public class HighScore {
 			}
 		}
 		scores.sort(Collections.reverseOrder());
+		
 	}
 	
 	
@@ -36,4 +37,8 @@ public class HighScore {
 	public void loadScores() {
 		
 	}
+	public ArrayList<Integer> getScores() {
+	    return new ArrayList<>(scores); // Returnera en kopia av listan
+	}
+
 }
