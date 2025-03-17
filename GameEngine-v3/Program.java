@@ -4,6 +4,7 @@ import java.awt.Graphics2D; // Man kanske kan ta bort dessa kodrader med import?
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.swing.*;
 
@@ -12,7 +13,7 @@ public class Program extends JFrame {
 	private int score = 0;
 	private JLabel highScoreLabel;
 	private HighScore highScores;
-	private ScoreLogik scoreLogik;
+	private LatestRun latestRun;
 	private String namn = "Leo";
 	private JPanel highPanel;
 	private JPanel runPanel;
@@ -21,8 +22,8 @@ public class Program extends JFrame {
 	
 	public Program() {
 		highScores = new HighScore();
+		latestRun = new LatestRun();
 		board = new GameBoard(this);
-		scoreLogik = new ScoreLogik(score, namn);
 		highPanel = new JPanel();
 		runPanel = new JPanel();
 		
@@ -59,7 +60,11 @@ public class Program extends JFrame {
 	
 	public void updateScore(int newScore) {
 		score = newScore;
+		System.out.println("Updating score: " + newScore); 
 		highScores.addTenScores(score);
+		latestRun.addScore(score);
+		updateHighScoreDisplay();
+		updateLatestRunDisplay();
 		//System.out.println("Scorelogik var:" + score);
 	}
 
@@ -73,5 +78,25 @@ public class Program extends JFrame {
 		Program program = new Program();
 	} 
 	//Jag tänkte på det, eventuellt nice att ha en action listener om liv == 0 pga då kan man skapa en knapp som "Start game" istället, för lite estetiska anledningar.
-
-}
+	private void updateHighScoreDisplay() {
+	    ArrayList<Integer> topScores = highScores.getScores();
+	    for (int i = 0; i < highLabel.length; i++) {
+	        if (i < topScores.size()) {
+	            highLabel[i].setText(String.valueOf(topScores.get(i)));
+	        } else {
+	            highLabel[i].setText("--");
+	        }
+	    }
+	}
+	
+	private void updateLatestRunDisplay() {
+	    LinkedList<Integer> latestScores = latestRun.getLatestRuns(); 
+	    for (int i = 0; i < runLabel.length; i++) {
+	        if (i < latestScores.size()) {
+	            runLabel[i].setText(String.valueOf(latestScores.get(i))); 
+	        } else {
+	            runLabel[i].setText("--"); 
+	        }
+	    }
+	}
+}	
