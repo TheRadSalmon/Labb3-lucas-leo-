@@ -42,8 +42,6 @@ public class GameBoard extends JComponent {
 		while(true) {
 			game.update(keyboard, program);
 			gameScore = game.returnTotalScore();
-			//System.out.println("GameScore: " + gameScore);
-			program.updateScore(gameScore);
 			try {
 				Thread.sleep(1000 / FPS); //Throttle thread
 			} catch (InterruptedException e) {
