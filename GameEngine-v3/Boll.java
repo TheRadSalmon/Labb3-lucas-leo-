@@ -39,10 +39,6 @@ public class Boll extends Sprite {
 		return lives.getLives();
 	}
 	
-	public void clearBoll(Boll boll) {
-	boll = null;
-	}
-	
 	public void resetLiv() {
 		lives.setLives(Variables.bollLiv);
 	}
