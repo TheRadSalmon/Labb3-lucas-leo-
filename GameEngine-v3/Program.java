@@ -52,7 +52,6 @@ public class Program extends JFrame {
 
 	public void updateScore(int newScore) {
 		score = newScore;
-		System.out.println("Updating score: " + newScore);
 		highScores.addScore(score); 
 		latestRuns.addScore(score); 
 		updateHighScoreDisplay();
